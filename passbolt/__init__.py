@@ -141,7 +141,7 @@ class PassboltAPI:
         token = response.headers.get("set-cookie")
         user_id = json.loads(response.text)
         self.user_id = user_id["body"]["id"]
-        self.token = token[10:-8]
+        self.token = token.split(';')[0].split('=')[1]
         self.session.headers = {"X-CSRF-Token": self.token}
 
     def check_login(self):
